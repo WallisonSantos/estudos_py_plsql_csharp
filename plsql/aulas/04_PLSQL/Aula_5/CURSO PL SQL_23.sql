@@ -1,0 +1,18 @@
+
+SELECT * FROM CLIENTE;
+
+DECLARE
+   v_SEGMERCADO_ID CLIENTE.SEGMERCADO_ID%type := 2;
+BEGIN
+  FOR v_ID IN 1..6 LOOP 
+      atualizar_cli_seg_mercado(p_ID => v_ID, p_SEGMERCADO_ID => v_SEGMERCADO_ID);
+  END LOOP;
+END;
+
+DECLARE
+   v_SEGMERCADO_ID CLIENTE.SEGMERCADO_ID%type := 1;
+BEGIN
+  FOR v_ID IN 1..6 LOOP 
+      atualizar_cli_seg_mercado(p_SEGMERCADO_ID => v_SEGMERCADO_ID, p_ID => v_ID);
+  END LOOP;
+END;
