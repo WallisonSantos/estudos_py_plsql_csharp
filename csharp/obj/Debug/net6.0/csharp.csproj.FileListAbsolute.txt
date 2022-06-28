@@ -1,0 +1,15 @@
+C:\Users\walli\OneDrive\Área de Trabalho\notes\csharp\bin\Debug\net6.0\csharp.exe
+C:\Users\walli\OneDrive\Área de Trabalho\notes\csharp\bin\Debug\net6.0\csharp.deps.json
+C:\Users\walli\OneDrive\Área de Trabalho\notes\csharp\bin\Debug\net6.0\csharp.runtimeconfig.json
+C:\Users\walli\OneDrive\Área de Trabalho\notes\csharp\bin\Debug\net6.0\csharp.dll
+C:\Users\walli\OneDrive\Área de Trabalho\notes\csharp\bin\Debug\net6.0\csharp.pdb
+C:\Users\walli\OneDrive\Área de Trabalho\notes\csharp\obj\Debug\net6.0\csharp.csproj.AssemblyReference.cache
+C:\Users\walli\OneDrive\Área de Trabalho\notes\csharp\obj\Debug\net6.0\csharp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\walli\OneDrive\Área de Trabalho\notes\csharp\obj\Debug\net6.0\csharp.AssemblyInfoInputs.cache
+C:\Users\walli\OneDrive\Área de Trabalho\notes\csharp\obj\Debug\net6.0\csharp.AssemblyInfo.cs
+C:\Users\walli\OneDrive\Área de Trabalho\notes\csharp\obj\Debug\net6.0\csharp.csproj.CoreCompileInputs.cache
+C:\Users\walli\OneDrive\Área de Trabalho\notes\csharp\obj\Debug\net6.0\csharp.dll
+C:\Users\walli\OneDrive\Área de Trabalho\notes\csharp\obj\Debug\net6.0\refint\csharp.dll
+C:\Users\walli\OneDrive\Área de Trabalho\notes\csharp\obj\Debug\net6.0\csharp.pdb
+C:\Users\walli\OneDrive\Área de Trabalho\notes\csharp\obj\Debug\net6.0\csharp.genruntimeconfig.cache
+C:\Users\walli\OneDrive\Área de Trabalho\notes\csharp\obj\Debug\net6.0\ref\csharp.dll
