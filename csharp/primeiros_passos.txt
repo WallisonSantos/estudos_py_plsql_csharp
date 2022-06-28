@@ -1,0 +1,84 @@
+
+1-
+# O CLR (common language runtime) é a máquina virtual que fornece um ambiente para a execução de programas escritos em .NET framework. Essa máquina nos fornece alguns aprimoramentos no desempenho.
+# Assinale a alternativa que contenha o grande benefício de uma máquina virtual .NET:
+
+## Não existe a possibilidade de usar componentes desenvolvidos em outras linguagens.
+-- Na realidade existe essa possibilidade e essa é uma vantagem da máquina virtual. Ela permite que componentes desenvolvidos em outras linguagens sejam utilizados.
+
+## Correta: Executar o código independentemente do sistema operacional.
+-- No mundo .NET você terá sempre o mesmo MSIL que será executado pela máquina virtual CLR de forma independente do sistema operacional. Assim não é preciso reescrever ou adaptar o código para rodar em um outro sistema ou integrar em um projeto escrito com outra linguagem .NET.
+
+## Compilar o código para vários executáveis de sistemas operacionais diferentes.
+-- Ainda não vimos como compilar um código C#, mas a saída do compilador é um executável em MSIL, não em linguagem específica para cada sistema operacional.
+
+2-
+# Nesta primeira aula, conhecemos o .NET Framework , uma plataforma criada pela Microsoft com o objetivo de termos um único ambiente para desenvolvimento e execução de sistemas e aplicações.
+# Sabendo disso, assinale as alternativas corretas:
+
+## Correta: Toda linguagem .NET é compilada para a linguagem intermediária MSIL e é compatível com o .NET Framework.
+-- Este é um dos benefícios do .NET Framework e o MSIL, já que quando os utilizamos, todo e qualquer código gerado para .NET pode ser executado em dispositivos que possuam o framework.
+
+##.NET Framework é a biblioteca utilizada por todas as aplicações .NET.
+-- Qualquer aplicação escrita em uma linguagem .NET (aquelas que são compiladas para MSIL) podem usar o .NET Framework.
+
+## O .NET Framework é um componente opcional do Windows que devemos instalar antes de usar o C#.
+-- Ops... na verdade, a partir do Windows XP, toda versão do Windows vem com o .NET.
+
+## .NET Framework é a biblioteca utilizada por todas as linguagens de programação.
+-- O .NET Framework é não é uma biblioteca compatível com linguagens que não são compiladas para MSIL, como Java e PHP.
+
+
+# Nessa aula introdutória já aprendemos vários assuntos fundamentais sobre C# e, em especial, o mundo .NET. Confira os principais aprendizados que tivemos até aqui:
+
+## Toda aplicação .NET é escrita em uma linguagem compilada para o código intermediário MSIL (Microsoft intermediate language);
+## O .NET Framework é uma biblioteca utilizada pelas aplicações .NET;
+## Uma aplicação .NET é compilada para o MSIL;
+## O código MSIL é executado pela máquina virtual do .NET, a CLR (common language runtime);
+## O just-in-time compiler é uma parte da CLR que transforma MSIL em código de máquina, apenas em tempo de execução.
+## Na próxima aula já vamos escrever o primeiro código C#! Vamos continuar?
+
+
+
+Na aula anterior, conhecemos um pouco a história do ecossistema .NET e quais necessidades levaram ao seu surgimento. Agora, vamos descobrir como começar a usar esse framework.
+Eu estou usando o Windows 11, mas desde o Windows XP temos todo o ecossistema .NET já instalado nas máquinas Windows. Para encontrar os componentes dele em nosso computador, vamos abrir o explorador de arquivos e ir ao drive C.
+Navegaremos até a pasta "Windows", em seguida entraremos em "Microsoft.NET". Nesse diretório, veremos "Framework" e "Framework64", essa escolha depende da aplicação que queremos rodar, no nosso caso usaremos a primeira opção. Entrando em "Framework", teremos uma variedade de versões, vamos clicar na mais recente.
+Nessa pasta, haverá diversos arquivos que compõem o ecossistema .NET. Um item importante é o csc.exe (C Sharp Compiler), que logo utilizaremos para compilar nosso primeiro programa em C#.
+Voltando ao drive C, criaremos uma pasta chamada "AprendendoCSharp". Nela, adicionaremos um documento de texto de nome "OlaMundo". Vamos abri-lo no bloco de notas e digitar nosso código.
+Em outras linguagens de programação, como o Python, existem expressões bastante famosas, principalmente quando vamos criar o clássico "Olá, mundo" — geralmente escrevemos um código como print("Olá, mundo"). No C#, em vez do print(), usaremos o Console.WriteLine("Olá, mundo") para "printar" essa frase.
+Apenas esse código, no entanto, não é o suficiente para que o programa funcione. Além do ponto e vírgula ao final, que é imprescindível no C# — Console.WriteLine("Olá, mundo"); —, ainda faltam alguns elementos:
+
+using System;
+class Programa
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Olá, mundo");
+    }
+}
+
+Por ora, não é preciso entender todas essas expressões, mas vale a pena atentar a alguns pontos. Observe, por exemplo, o uso das chaves para abrir e fechar blocos de código. Assim, é possível constatar que Console.WriteLine() faz parte do bloco static void Main(string[] args), pois está entre chaves. Outro aspecto interessante é a indentação, para melhorar a visualização e interpretação de cada porção do código.
+Vamos salvar esse arquivo. Desse modo, o programa está pronto para ser compilado e executado. Para tanto, precisaremos usar a linha de comando. No menu Iniciar, pesquisaremos por "cmd" e abriremos o prompt de comando.
+Primeiramente, temos que acessar a pasta em que salvamos nosso programa, digitando o comando cd c:\AprendendoCSharp e pressionando o "Enter".
+Você pode digitar cd c:\A e pressionar a tecla "Tab" para autocompletar o nome da pasta e agilizar o processo.
+Em seguida, acessaremos aquele arquivo csc.exe que vimos há pouco, o compilador. Vamos digitar o caminho até ele (lembre-se de usar a tecla "Tab" a seu favor): c:\Windows\Microsoft.NET\Framework\v4.0.30319\csc.exe.
+Ao pressionar o "Enter", será mostrada um aviso de que "Nenhum arquivo de origem foi especificado", porque não determinamos qual é o arquivo que queremos compilar.
+Vamos pressionar a tecla de seta para cima para refazer o último comando, mas dessa vez vamos fornecer o nome do arquivo, assim: c:\Windows\Microsoft.NET\Framework\v4.0.30319\csc.exe OlaMundo.txt. Apertando o "Enter", veremos que a compilação foi feita com sucesso.
+Voltando ao explorador de arquivo, na pasta "AprendendoCSharp", agora temos dois arquivos: o documento de texto e o arquivo compilado. Para executá-lo, vamos ao prompt de comando e escreveremos OlaMundo.exe. Dessa forma, o programa será executado e veremos a frase "Olá, mundo" no prompt de comando, como esperado. Conseguimos compilar e executar nosso primeiro programa com C#!
+Agora, podemos voltar ao nosso arquivo de texto e modificar o programa. Vamos colocar mais texto para ser "printado":
+
+using System;
+class Programa
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Olá, mundo. Este é meu primeiro programa!");
+    }
+}
+
+Depois de salvar o arquivo, vamos fazer a compilação novamente e, em seguida, executar OlaMundo.exe mais uma vez. Veremos que o resultado condiz com nossa modificação.
+É importante nos atentar a alguns erros comuns. Um deles é a ausência do ponto e vírgula que vimos recentemente. Como exemplo, podemos retirar o ponto e vírgula para causar um erro propositalmente e ver o que acontece: no momento da compilação, somos informados que há um problema na linha 7, no caractere 65 — um ponto e vírgula é esperado. Ou seja, sabemos exatamente onde o programa parou de ser compilado. Já podemos corrigir o erro.
+Para facilitar a leitura dos dados, você pode executar o comando cls no prompt para limpar o console.
+Outro problema que podemos encontrar durante a programação é o uso indevido das palavras-chave, as palavras reservadas. Por exemplo: o C# é case-sensitive, ou seja, ele distingue entre letras maiúsculas e minúsculas, então se usássemos Static (com S maiúsculo) em vez de static, também nos depararíamos com um erro. Nesse caso, o aviso não seria tão fácil de compreender como o anterior: "Token 'void' inválido na declaração de membro class, struct ou interface"
+A abertura e o fechamento de chaves também são essenciais para que o programa funcione corretamente. Quanto mais extenso for o código, maiores as chances de nos esquecermos desses detalhes, mas são muito importantes! Nesse caso, receberíamos uma mensagem parecida com: "{ esperada".
+Nessa aula, entendemos como compilar e executar nosso primeiro programa em C# e focamos em alguns erros comuns. Na próxima, veremos como compilar e executar esse programa em uma plataforma um pouco mais intuitiva, utilizando o Visual Studio, uma IDE (Ambiente de Desenvolvimento Integrado) bastante famosa.

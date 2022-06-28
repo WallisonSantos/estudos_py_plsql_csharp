@@ -1,0 +1,42 @@
+Vamos começar falando um pouco sobre a história e o ecossistema da linguagem, comentando sobre o C# e o .NET, de onde e por que eles surgiram e como funcionam por trás do que enxergamos na nossa tela durante o desenvolvimento do código.
+
+É provável que você já tenha se deparado com expressões como Visual Studio, Common Language Runtime (CLR), .NET Framework, MSIL e linguagens como C e C++, e tenha feito uma ligação com o C#. Para entender por que o C# surgiu e como chegou ao que é hoje, precisamos comentar sobre a situação da Microsoft por volta dos anos 80.
+
+Naquela época, a Microsoft trabalhava (e ainda trabalha) com diversos times encarregados de inúmeras aplicações e que, consequentemente, por vezes usavam diferentes linguagens de programação — uns trabalhavam com C, outros com Visual Basic, por exemplo. Vamos usar essas duas linguagens para entender a problemática a seguir.
+
+Ao desenvolver uma determinada aplicação em C, geralmente temos que lidar com bibliotecas em C. Para entender o que são essas "bibliotecas", podemos abrir o Bloco de Notas em nosso computador e verificar que existem certas funções que são muito comuns, como o botão de minimizar, de maximizar e de fechar, ou as funcionalidades de salvar e escolher modos de exibição. Quando temos esses casos de funções muito utilizadas, é normal reuni-las no que chamamos de "biblioteca", para facilitar o trabalho. Então, desenvolvendo uma aplicação em C, geralmente lidamos com bibliotecas em C.
+
+Prosseguindo, vamos imaginar que existe um time que trabalha com C (e bibliotecas em C) e outro que trabalha com Visual Basic (e bibliotecas em VB). Caso haja interesse em migrar uma aplicação em C para uma aplicação em VB, seria necessária uma pessoa que soubesse as duas linguagens (e suas bibliotecas) para transferir a aplicação de uma para outra. Essa situação pode se tornar um problema. Então, como melhorar esse processo de reescrita do código e torná-lo menos trabalhoso? Voltaremos a esse ponto daqui a pouco.
+
+Considere que temos uma aplicação em C, com sua biblioteca em C, que serão compiladas e executadas em determinada plataforma, por exemplo, o Windows. Além dela, também temos uma aplicação em VB, com biblioteca VB, sendo igualmente compiladas e executadas no sistema operacional Windows, entre outras aplicações, linguagens e bibliotecas X, Y ou Z nessa mesma plataforma.
+
+Existem, no entanto, outros sistemas operacionais, como o Linux, o Android, o Mac OS etc. Cabe mencionar também o Xbox One, o Xbox 360, o Playstation 3 e o 4, porque o C# é bastante utilizado no meio de jogos. Pensando nessa variedade, teríamos que adequar as aplicações a cada uma dessas plataformas — trabalhando no Windows, o código seria diferente do que se estivéssemos no Linux, por exemplo.
+
+A solução para esse problema são as máquinas virtuais. A máquina virtual será a plataforma usada pelo C#, pelo .NET, no nosso ecossistema. Ela é bem diferente dos conceitos que temos da máquina com processador físico e seus componentes. Trata-se, na verdade, de uma máquina emulada pelo computador físico e ela nos permitirá desenvolver aplicações e bibliotecas não mais para um determinado sistema operacional, mas de uma forma não-específica, generalizada, para uma máquina virtual. É abaixo dela que vêm os sistemas operacionais, que vão compreender o que é recebido dessa máquina.
+
+É neste ponto que entra a MSIL (Microsoft Intermediate Language). A máquina virtual está preparada para interpretar a linguagem MSIL. Nós, desenvolvedores, vamos escrever nossos códigos em uma linguagem que pertence ao ecossistema .NET (como C#, Visual Basic ou Python.NET) e o compilador será responsável por "traduzir" esse código para a linguagem MSIL, de modo que teremos uma aplicação em MSIL. Ou seja, existe uma espécie de unificação das linguagens do ecossistema .NET, tornando-as inteligíveis para diferentes sistemas operacionais.
+
+Dessa forma, montando um esquema visual do nosso ecossistema, temos as linguagens de programação no topo — C#, VB, F#, entre outras —, com as quais nós desenvolvemos o código. Logo abaixo está a aplicação, "traduzida" para MSIL por um compilador. A seguir, a biblioteca, também em MSIL. Abaixo, vemos a máquina virtual que interpreta o código em MSIL que, por fim, será executado por diversos sistemas operacionais (como Windows, Linux etc), na base desse esquema.
+
+Dentro do .NET, todos esses elementos têm nomes mais específicos. No caso da nossa máquina virtual, temos o CLR (Common Language Runtime), então qualquer linguagem que faça parte do ecossistema .NET estará por trás dessa máquina virtual que permitirá que escrevamos para diferentes sistemas operacionais usando uma mesma linguagem, um mesmo código. Na biblioteca, temos o .NET Framework. E nossa aplicação em MSIL é a aplicação .NET.
+
+Até agora, conversamos sobre o processo de tornar nosso código legível para vários sistemas e sobre MSIL. Vejamos, então, um exemplo de MSIL. Do lado esquerdo, temos Console.WriteLine("Olá mundo"); um comando que utilizaremos para "printar" uma frase. Do lado direito, temos esse comando interpretado para MSIL, uma combinação um pouco complicada de entender:
+
+nop
+ldstr
+call
+nop
+ret
+
+É assim que o MSIL funciona por trás das telas dos nossos computadores.
+
+Dessa forma, fomos apresentados a uma grande arquitetura que resolve vários problemas para nós. Mas esse formato já existia no mercado, apenas não atendia aos interesses da Microsoft. No final dos anos 90, já existia a linguagem Java — bastante utilizada até hoje —, que contava com os conceitos de linguagem intermediária e máquina virtual. A Microsoft tentou adotar o Java em seu sistema operacional, mas se deparou com alguns problemas judiciais — fizeram um contrato com a Sun (proprietária dos direitos da linguagem Java), mas tentaram burlar algumas das regras e, por fim, precisaram desenvolver a própria linguagem, criando o .NET. O responsável pelo gerenciamento do time que desenvolveu a linguagem C# e o .NET é Anders Hejlsberg.
+
+É importante que entendamos todos esse processo para que seja possível entendermos como funciona o nosso código ao longo das nossas aulas. Espero que você tenha gostado de aprender um pouco sobre a história desse ecossistema, uma ferramenta poderosa que serve muitos propósitos. Ao longo das aulas, veremos um pouco do que é possível realizar de início para dar seguimento para outras ferramentas no mundo do C#.
+
+Vimos sobre a história do C# e .NET e como surgiu a necessidade de criar essa nova linguagem. A linguagem C# tem um futuro muito promissor, muito por conta da sua versatilidade, já que com ela podemos desenvolver aplicações desktop, web, mobile, dentre outras.
+
+Teve curiosidade para saber ainda mais sobre a história do C# e além disso ouvir sobre o futuro da linguagem?
+
+Nesse artigo temos um #HipstersPontoTube onde Gabs Ferreira e o Giovanni Bassi conversam sobre o assunto.
+https://www.alura.com.br/artigos/historia-e-futuro-do-c
