@@ -264,3 +264,53 @@ end;
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+set serveroutput on;
+set verify off;
+variable gdepartment_id number
+execute :gdepartment_id := 60;
+
+declare
+
+    cursor       cur_emp_job is
+        select     distinct e.job_id, e.salary, j.job_title
+        from      employees e
+        inner join   jobs j
+        on          e.job_id = j.job_id
+        where   e.department_id = :gdepartment_id
+        order by    j.job_title
+        ;
+            
+    vn_med_sal employees.salary%type;
+    vn_sum_sal employees.salary%type;
+    vv_job_title jobs.job_title%type;
+    vn_department_id employees.department_id%type;
+    
+begin
+
+    select avg(e.salary), sum(e.salary), j.job_title, e.department_id
+    into vn_med_sal, vn_sum_sal, vv_job_title, vn_department_id
+    from employees e
+    inner join jobs j
+    on j.job_id = e.job_id
+    where e.department_id = :gdepartment_id
+    group by j.job_title, e.department_id
+    ;
+    
+    dbms_output.put_line(
+                                            ' Cargo: ' || vv_job_title ||
+                                            ' -  Id Dpto.: ' || vn_department_id ||
+                                            ' -  Média Salario: ' || ltrim(to_char(vn_med_sal, 'L999g999d99' ) ) ||
+                                            ' -  Soma Salario: ' || ltrim(to_char(vn_sum_sal, 'L999g999d99') )
+                                        );
+
+    FOR rec_emp_job in cur_emp_job LOOP
+        dbms_output.put_line(
+                                                ' Id Job: ' || rec_emp_job.job_id ||
+                                                ' Salario: ' || rec_emp_job.salary ||
+                                                ' Cargo: ' || rec_emp_job.job_title
+                                            );
+    END LOOP;
+end;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
