@@ -41,9 +41,7 @@ begin
 	END LOOP;
 end;
 
-
----------------------
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 set serveroutput on;
 set verify off;
@@ -75,7 +73,7 @@ dbms_output.put_line
 
 end;
 
----------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 set serveroutput on;
 create or replace function retorna_string_convertida (
@@ -114,3 +112,155 @@ begin
         vn_counter := vn_counter + 1;
    end loop;
 end;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+accept vn_employee_id prompt ' ... ';
+declare
+    type rec_emp_type is record (
+        employee_id employees.employee_id%type,
+        first_name employees.first_name%type,
+        last_name employees.last_name%type,
+        email employees.email%type,
+        phone_number employees.phone_number%type,
+        job_title jobs.job_title%type
+        );
+    
+    rec_emp rec_emp_type;
+    vn_employee_id employees.employee_id%type := &vn_employee_id;
+begin
+    
+    select e.employee_id, e.first_name, e.last_name, e.email, e.phone_number, j.job_title
+    into rec_emp
+    from employees e
+    inner join jobs j
+    on j.job_id  = e.job_id
+    where e.employee_id  = vn_employee_id
+    ;
+    
+    dbms_output.put_line(rec_emp.job_title);
+end;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+variable gcargo varchar2;
+execute :gcargo := 'Programmer';
+
+variable gemployee_id number;
+execute :gemployee_id := 104;
+
+declare
+    vv_job_title jobs.job_title%type;
+    vn_min_salary jobs.min_salary%type;
+    vn_max_salary jobs.max_salary%type;
+    vn_salary employees.salary%type;
+begin
+
+    select j.job_title, j.min_salary, j.max_salary, e.salary
+    into vv_job_title, vn_min_salary, vn_max_salary, vn_salary
+    from employees e 
+    inner join jobs j
+    on j.job_id = e.job_id
+    where j.job_title = :gcargo and e.employee_id = :gemployee_id;
+    
+dbms_output.put_line
+                    ('Job Titulo: '
+                     || vv_job_title
+                     || ' - Salario minimo: '
+                     || vn_min_salary
+                     || ' - Salario maximo: '
+                     || vn_max_salary
+                     || ' - Salario maximo: '
+                     || vn_salary
+                     );
+end;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+variable gvn_number_one number;
+variable gvn_number_two number;
+
+execute :gvn_number_one := 100;
+execute :gvn_number_two := 200;
+
+declare
+    vn_number_one number(10);
+    vn_number_two number(10);
+    vn_total number(10);
+    vn_media number(10);
+begin
+    vn_number_one := :gvn_number_one;
+    vn_number_two := :gvn_number_two;
+    
+    select sum(vn_number_one + vn_number_two)
+    into vn_total
+    from dual;
+    
+    vn_media := vn_total / 2;
+    
+    dbms_output.put_line('Média ' || vn_media);
+    
+end;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+declare
+    vn_number_one number(13, 2) := 250.353 ;
+    vn_number_two number(13, 2) := 250.565 ;
+    vn_media number(13, 2);
+    vn_total number(13, 2);
+begin
+
+    select sum(vn_number_one + vn_number_two) 
+    into vn_total
+    from dual
+    ;
+    
+    vn_media := ROUND(vn_total / 2, 2);
+    
+    dbms_output.put_line('Média ' || vn_media);
+end;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+accept p_job_title prompt ' ... ';
+set serveroutput on;
+set verify off;
+declare
+    vv_first_name employees.first_name%type;
+    vv_last_name employees.last_name%type;
+    vn_salary employees.salary%type;
+    vn_employee_id employees.employee_id%type;
+    vv_job_title jobs.job_title%type := &p_job_title;
+    
+begin
+
+    select employees.first_name, employees.last_name, employees.salary, employees.employee_id, jobs.job_title
+    into vv_first_name, vv_last_name, vn_salary, vn_employee_id, vv_job_title
+    from employees
+    inner join jobs
+    on jobs.job_id = employees.job_id
+    /* where employee_id = vv_job_title*/;
+    
+    dbms_output.put_line(
+                        'Primeiro Nome: '
+                     || vv_first_name
+                     || ' -  Segundo Nome: '
+                     || vv_last_name
+                     || ' -  Salario: '
+                     || ltrim(to_char(vn_salary, 'L99g999g999d99'))
+                     || ' -  Emp Id: '
+                     || vn_employee_id
+                     || ' -  Cargo: '
+                     || vv_job_title
+                     );
+                     
+exception
+    when no_data_found then
+        raise_application_error(-20000, 'Erro parâmetro não encontrado para a consulta de dados ' || SQLCODE || ' - ' || SQLERRM);
+    when others then
+        raise_application_error(-20001, 'Erro Oracle - Consulte o suporte e informe as seguintes descrições '|| SQLCODE || ' - ' || SQLERRM);
+end;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
