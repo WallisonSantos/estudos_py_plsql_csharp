@@ -314,3 +314,27 @@ end;
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+set serveroutput on;
+
+variable gdepartment_id number;
+variable gpercentual number;
+
+execute :gdepartment_id := 60;
+execute :gpercentual := 20;
+
+print gdepartment_id;
+print gpercentual;
+
+declare
+    vdepartment_id employees.department_id%type := :gdepartment_id ;
+    vpercentual employees.salary%type := :gpercentual ;
+begin
+    update employees
+    set salary  = salary * (1 + vpercentual / 100)
+    where department_id = vdepartment_id ;
+    dbms_output.put_line('Numero de funcionários atualizados: ' || SQL%ROWCOUNT);
+end;
+rollback;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
