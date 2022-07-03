@@ -12,6 +12,7 @@ namespace csharp
             string str = "Maria Green";
             object obj1 = "alex brown";
             object obj2 = 5.5f;
+            
 
             sbyte x = -119 ;
             byte y = 255 ;
@@ -24,15 +25,20 @@ namespace csharp
             y ++ ;
             x ++ ;
             
+
             System.Console.WriteLine("Valor para " + gen) ;
 
-            Console.WriteLine("Valor para Sbyte " + x ) ;
-            Console.WriteLine("Valor para byte " + y ) ;
+            System.Console.WriteLine("Valor para Sbyte " + x ) ;
+            System.Console.WriteLine("Valor para byte " + y ) ;
 
-            Console.WriteLine("Valor para int " + num1) ;
-            Console.WriteLine("Valor para long " + num2) ;
-            Console.WriteLine("Valor para double " + num3) ;
-            Console.WriteLine("Valor para float " + num4) ;
+            System.Console.WriteLine("Valor para int " + num1) ;
+            System.Console.WriteLine("Valor para long " + num2) ;
+            System.Console.WriteLine("Valor para double " + num3) ;
+            System.Console.WriteLine("Valor para float " + num4) ;
+
+            System.Console.WriteLine("Valor para " + str);
+            
+
         }
     }
 }
