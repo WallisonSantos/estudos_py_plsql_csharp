@@ -338,3 +338,69 @@ rollback;
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+select 
+    count(*),
+    emp.salary   sal,
+    emp.job_id job,
+    jobs.job_title cargo
+from
+    jobs,
+    employees emp
+where
+    jobs.job_id = emp.job_id(+) 
+group by
+    emp.salary,
+    emp.job_id,
+    jobs.job_title
+;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- PL SQL, variavel Bind e comando update dentro do bloco anonimo
+
+set serveroutput on
+variable commission number
+
+declare
+    vn_employee_id number(10, 2) := 120 ;
+begin
+    :commission := 0.20 ;
+    dbms_output.put_line('Comissão ' || :commission) ;
+    
+    update employees
+    set salary = salary * :commission
+    where employee_id = vn_employee_id
+    ;
+
+end;
+
+-- PL SQL, variavel BIND e comando UPDATE dentro do bloco ANONIMO, uso de ANINHAMENTO de Bloco PL SQL ...
+
+set serveroutput on
+variable commission number
+
+declare
+    vv_first_name employees.first_name%type ;
+    vv_last_name employees.last_name%type ;
+    vn_employee_id number(10, 2) := 120 ;
+begin
+    :commission := 0.20 ;
+    
+    declare
+        
+    begin
+        update employees
+        set salary = salary * :commission
+        where employee_id = vn_employee_id ;
+    end ;
+        
+    select first_name, last_name
+    into vv_first_name, vv_last_name
+    from employees
+    where employee_id = vn_employee_id;
+    
+    dbms_output.put_line(' Nome  ' || vv_first_name || ' ' || vv_last_name);
+    dbms_output.put_line(' emp id  ' || vn_employee_id) ;
+end;
+
+--
