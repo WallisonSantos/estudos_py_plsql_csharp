@@ -403,4 +403,30 @@ begin
     dbms_output.put_line(' emp id  ' || vn_employee_id) ;
 end;
 
---
+-- PL SQL, variavel BIND e comando SELECT dentro do bloco ANONIMO 
+
+set verify off
+declare
+    vv_first_name employees.first_name%type;
+    vv_last_name employees.last_name%type;
+    vn_salary employees.salary%type;
+begin
+    select first_name, last_name, salary
+    into vv_first_name, vv_last_name, vn_salary
+    from employees
+    where employee_id = &emp_id;
+    
+    dbms_output.put_line('Nome ' || vv_first_name || ' ' || vv_last_name || ' ' || vn_salary) ;
+end;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Introdução ao tipo de dado Record e Collection ...
+
+DECLARE
+	TYPE [tabela_record_type] IS RECORD (
+		campo_um [tipo_de_dado{%type} ];
+		campo_dois [tipo_de_dado{%type} ];
+		campo_n [tipo_de_dado{%type} ];
+	
+	variavel_record tabela_record_type;
