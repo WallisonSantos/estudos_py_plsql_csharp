@@ -430,3 +430,121 @@ DECLARE
 		campo_n [tipo_de_dado{%type} ];
 	
 	variavel_record tabela_record_type;
+	
+	
+-- O Comando EXECUTE IMMEDIATE  ...
+
+EXECUTE IMMEDIATE 'SQL string'
+[ INTO { variável [, variável ] ... | record } ]
+[ USING [ IN | OUT | IN OUT ] bind_argument ];
+
+-- SQL String: é uma string que contém aquilo que se deseja executar
+-- Clausula INTO: a especificação de variaveis é opcional e indica uma ou mais variaveis para as quais valores selecionados serão atribuídos
+-- Clausula USING: a seção bind_argument (parâmetros) é opcional e designa um valor repassado para bind variables na SQL string
+-- EXECUTE IMMEDIATE não realizara automaticamente o COMMIT de uma transação DML anterior
+-- Consultas que retornem mais de uma linha não são suportados como valor de retorno
+-- Para executar comandos DDL através de SQL dinâmico,o usuário deve er recebido os privilégios de sistema de forma explicita, não pode ser através de ROLES
+
+
+-- Function PIPELINED ...
+-- Criação do ARRAY
+
+CREATE OR REPLACE TYPE REG_FUNCIONARIO AS OBJECT (
+	FIRST_NAME VARCHAR2(20),
+	LAST_NAME VARCHAR2(25) ,
+	JOB_ID NUMBER(6,0)
+);
+
+	
+-- Criação da MATRIZ
+
+CREATE OR REPLACE TYPE TABLE_REG_FUNCIONARIO AS TABLE OF REG_FUNCIONARIO ;
+
+
+-- Conectado como Sys, GRANT ANY TYPE TO xe;
+-- Registro Array, DROP TYPE TABLE_REG_FUNCIONARIO;
+-- Array: [0] [1] [2] [3] [4]
+-- Matriz: 
+          [0] [1] [2] [3] [4]
+          [0] [1] [2] [3] [4]
+          [0] [1] [2] [3] [4]
+	;	;
+	
+-- Function que retorna registros
+CREATE OR REPLACE FUNCTION GET_EMPLOYEE( 
+	p_emp_id hr.employees.JOB_ID%type 
+
+) RETURN TABLE_REG_FUNCIONARIO PIPELINED
+
+IS
+	list_array REG_FUNCIONARIO;
+	
+	CURSOR cur_emp_func IS
+		SELECT EMP.FIRST_NAME, EMP.LAST_NAME, EMP.JOB_ID
+		FROM HR.EMPLOYEES EMP
+		WHERE EMP.JOB_ID = p_emp_id 
+	;
+	
+	REG cur_emp_func%ROWTYPE ;
+	
+BEGIN
+
+	OPEN 
+		cur_emp_func
+	;
+	
+	FETCH 
+		cur_emp_func INTO REG
+	;
+	
+	list_array := REG_FUNCIONARIO(
+		REG.FIRST_NAME, REG.LAST_NAME, REG.JOB_ID
+	);
+	
+	PIPE ROW(
+		list_array
+	);
+	
+	CLOSE 
+		cur_emp_func 
+	;
+	
+	RETURN ;
+
+END ;
+
+
+-- Executando
+SELECT * FROM TABLE(GET_EMPLOYEE(120));
+
+SELECT EMPL.*, JOB.JOB_TITLE
+FROM   TABLE(GET_EMPLOYEE(1)) EMPL, JOBS JOB
+WHERE JOB.JOB_ID
+	
+
+
+-- USO DE COUNT DENTRO DE CASE ...
+
+SELECT
+    COUNT(CASE WHEN EMP.SALARY <= 8999 THEN 1 ELSE NULL END) BAIXO,
+    COUNT(CASE WHEN EMP.SALARY BETWEEN 9000 AND 20000 THEN 1 ELSE NULL END) MEDIO,
+    COUNT(CASE WHEN EMP.SALARY > 20000 THEN 1 ELSE NULL END) ALTO
+FROM
+    HR.EMPLOYEES EMP;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
