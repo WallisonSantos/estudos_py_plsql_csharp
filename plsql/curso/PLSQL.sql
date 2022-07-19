@@ -530,14 +530,56 @@ SELECT
     COUNT(CASE WHEN EMP.SALARY BETWEEN 9000 AND 20000 THEN 1 ELSE NULL END) MEDIO,
     COUNT(CASE WHEN EMP.SALARY > 20000 THEN 1 ELSE NULL END) ALTO
 FROM
-    HR.EMPLOYEES EMP;
+    HR.EMPLOYEES EMP
+;
 	
+---
+
+
+
+CREATE OR REPLACE PROCEDURE PKG_RETORNA_REGS_CTRS (
+    p_region_id IN REGIONS.REGION_ID%TYPE DEFAULT IS NULL
+) IS
+
+    TYPE t_rec_regs_ctrs IS RECORD (
+        REGION_ID      REGIONS.REGION_ID%TYPE
+        , REGION_NAME  REGIONS.REGION_NAME%TYPE
+        , COUNTRY_ID   COUNTRIES.COUNTRY_ID%TYPE
+        , COUNTRY_NAME COUNTRIES.COUNTRY_NAME%TYPE
+        )
+    ;
+    TYPE t_tab_rec_regs_ctrs IS TABLE OF t_rec_regs_ctrs
+        INDEX BY BINARY_INTEGER
+    ;
+	vector_regs_ctrs t_tab_rec_regs_ctrs ;
+
+    vv_string VARCHAR2(3000) ;
+    
+BEGIN
+
+    vv_string := '
+        select 
+            regs.REGION_ID
+            , regs.REGION_NAME
+            , ctrs.COUNTRY_ID
+            , ctrs.COUNTRY_NAME
+        from
+            COUNTRIES ctrs
+            , REGIONS regs
+        WHERE
+            ctrs.REGION_ID = regs.REGION_ID
+        ;
+    '
+
+    IF p_region_id IS NOT NULL THEN
+
+        vv_string := vv_string || ' AND ctrs.REGION_ID = :'
+
+    END IF ;
+
+END ;
 	
-	
-	
-	
-	
-	
+
 	
 	
 	
