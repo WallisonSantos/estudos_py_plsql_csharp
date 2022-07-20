@@ -25,4 +25,4 @@ for rodada in range(first_index, last_index):
     print("R$ {:012.5f} ".format(45))
     print("Data {:02d}/{:02d} ".format(3,2))
     print("Data {:02d}/{:02d} ".format(2,3))
-    print("Data {:02d}/{:02d} ".format(19, 11))
+    print("Data {:02d}/{:02d} ".format(19, 11)) 

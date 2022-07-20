@@ -1,5 +1,3 @@
-BULK
-
 ------------------ Criação da Tabela de Itens: Criado a tabela e feito a alteração adcionando uma chave primaria com referencia no campo codigo item.
 
 CREATE TABLE cadastro_item (
